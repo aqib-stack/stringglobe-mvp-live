@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/admin';
 
 export async function POST() {
+  const stripe = getStripe();
   const demoStringerUid = 'demo-stringer';
   const userSnap = await adminDb.collection('users').doc(demoStringerUid).get();
   const user = userSnap.data();
